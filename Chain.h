@@ -1,9 +1,3 @@
-#include <iostream>
-#include <random>
-#include <functional>
-#include <exception>
-using namespace std;
-
 template<class T>
 class ChainNode {
     friend Chain<T>;
@@ -16,23 +10,15 @@ class ChainNode {
 template <class T>
 class Chain {
     public:
-        Chain() {first = 0;}
+        Chain()
         ~Chain();
-
         bool IsEmpty() const;
-
         int Length() const;
-
         bool Find(int k, T& x) const;
-
         int Search(const T& x) const;
-
         Chain<T> & Delete(int k, T& x);
-
         Chain<T> & Insert(int k, const T& x);
-
         void Output(iostream& out) const;
-
     private:
         ChainNode<T> *first; // pointer to first node
 };

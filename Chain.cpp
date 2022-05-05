@@ -1,10 +1,12 @@
 #include <iostream>
 #include <Chain.h>
+#include <exception>
+#include <random>
 using namespace std;
 
 template<class T>
 bool Chain<T>::IsEmpty() const {
-    return first == 0;
+    first == 0;
 }
 
 template<class T>
