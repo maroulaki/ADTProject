@@ -2,7 +2,6 @@
 #include <exception>
 using namespace std;
 
-
 template<class T> 
 int Chain<T>::Search(const T &x) const {
     // Locate x. Return position of x if found.
