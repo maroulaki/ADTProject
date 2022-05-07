@@ -1,20 +1,21 @@
-template<class T>
 class ChainNode {
-    friend Chain<T>;
+    friend Chain;
     private:
-        T data;
-        ChainNode<T> *link;
+        int data;
+        ChainNode *link;
 };
 
-template <class T>
+
 class Chain {
     public:
-        Chain() {first = 0;}
+        Chain();
         ~Chain();
-        int Search(const T& x) const; 
-        Chain<T> & Insert(int k, const T& x);
+        int Search(const int& x) const; 
+        Chain & Insert(int k, const int& x);
     private:
-        ChainNode<T> *first; // pointer to first node
+        ChainNode *first; // pointer to first node
+        ChainNode *last; //pointer to last node
+        int length; //length of list
 };
 
 

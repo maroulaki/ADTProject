@@ -10,12 +10,14 @@ class HistoNode {
 template <class T>
 class Histogram {
     public:
-        Histogram() {first = 0;}
+        Histogram();
         ~Histogram();
-        bool IsEmpty() const;
-        int Search(const T& x) const; 
-        Histogram<T> & Insert(int k, const T& x);
-        Histogram<T> & Increase(const T& x); //Increases the times a number is found in the relevant HistoNode
+        HistoNode<T>* & Exists(const T& x) const; 
+        int getMax() const; //fetches the largest (essentially last) number of the histogram
+        Histogram<T> & Insert(const T& x); //Inserts the number in the appropriate position
+        void Increase(const HistoNode<T> *ptr); //Increases the times a number is found in the relevant HistoNode
+        
     private:
-        HistoNode<T> *first; // pointer to first node
+        HistoNode<T> *first; // pointer to first Histonode
+        HistoNode<T> *last;
 };

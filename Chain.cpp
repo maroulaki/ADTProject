@@ -1,12 +1,17 @@
 #include <Chain.h>
+#include <iostream>
 #include <exception>
 using namespace std;
 
-template<class T> 
-int Chain<T>::Search(const T &x) const {
+Chain::Chain() {
+    first = 0;
+    last = 0;
+}
+
+int Chain::Search(const int &x) const {
     // Locate x. Return position of x if found.
     // Return 0 if x not in the chain.
-    ChainNode<T> *current = first;
+    ChainNode *current = first;
     int index = 1; // index of current
     while (current && current->data != x) {
         current = current->link;
@@ -16,28 +21,46 @@ int Chain<T>::Search(const T &x) const {
     return 0;
 }
 
-template<class T> 
-Chain<T> & Chain<T>::Insert(int k, const T &x) {
+
+Chain & Chain::Insert(int k, const int &x) {
     // Insert x after the k'th element.
     // Throw OutOfBounds exception if no k'th element.
     // Pass NoMem exception if inadequate space.
-    if (k < 0) throw OutOfBounds();
+    if (k < 0) {
+        cout<<"Invalid k position"<<endl;
+        throw __throw_range_error;
+    }
     // p will eventually point to k'th node
-    ChainNode<T> *p = first;
-    for (int index = 1; Index < k && p; index++)
-    p = p->link; // move p to k'th
-    if (k > 0 && !p) throw OutOfBounds(); // no k'th
+    ChainNode *p;
+    if (k == 0) {
+        p = first;
+    } else if (k == length) {
+        p = last;
+    } else {
+        for (int index = 1; index < k && p; index++) {
+            p = p->link; // move p to k'th
+        }
+    }
+    
+    if (k > 0 && !p) {
+        cout<<"k'th element not found"<<endl; // no k'th
+        throw __throw_range_error;
+    }
+    
     // insert
-    ChainNode<T> *y = new ChainNode<T>; 
+    ChainNode *y = new ChainNode; 
     y->data = x;
-    if (k) {
+    if (k == 0) {
+        // insert as first element
+        y->link = NULL; 
+        first = y;
+    } else if (k == length) {
+        y->link = NULL;
+        p->link = y;
+    } else {
         // insert after p
         y->link = p->link; 
         p->link = y;
-    } else {
-        // insert as first element
-        y->link = first; 
-        first = y;
     }
     return *this;
 }
