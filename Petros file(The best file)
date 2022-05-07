@@ -3,7 +3,7 @@
 #include <functional>
 
 
-
+// now it works for real
 //Maria δουλευει ο κοδηκας αυτος κανει ακριβος οτι του ζητα η ασκηση
 // τελικα ηταν μικρο το bug το εφτιαξα
 
@@ -69,7 +69,7 @@ int main() {
 
         T = H;
         int AIA; // the numbers found
-        for (int i = 1; i <= 100; i++) {// for to create the histo chain //searching for i
+        for (int i = 0; i <= 100; i++) {// for to create the histo chain //searching for i
             AIA = 0;
             
             N = H;
@@ -85,7 +85,7 @@ int main() {
             
             
             
-            if (i == 1)             // making the head istorogram node
+            if (i == 0)             // making the head istorogram node
             {
                 N = new node;
                 HH = N;
@@ -109,7 +109,7 @@ int main() {
         //int hell;
         N = HH;
         // prints the histogram second attemp
-        for (int i = 1; i <= 100; i++)
+        for (int i = 0; i <= 100; i++)
         {
             //hell = i + 1;
             std::cout << "the number : " << (i) << " appears " << N->num << " Time \n";
