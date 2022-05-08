@@ -93,7 +93,6 @@ void Histogram::printHistogram() const {
         }
         cout<<"NULL"<<endl;
     }
-    
 }
 
 Histogram::~Histogram() { }
