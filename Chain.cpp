@@ -3,10 +3,6 @@
 #include <exception>
 using namespace std;
 
-int ChainNode::getX() const {
-    return data;
-}
-
 Chain::Chain() {
     first = 0;
     last = 0;

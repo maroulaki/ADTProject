@@ -1,7 +1,5 @@
 class ChainNode {
     friend Chain;
-    public:
-        int getX() const;
     private:
         int data;
         ChainNode *link;

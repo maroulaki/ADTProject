@@ -1,48 +1,88 @@
 #include <Histogram.h>
-#include <exception>
+#include <iostream>
+#include <stdio.h>
 using namespace std;
 
-template<class T> 
-Histogram<T>::Histogram() {
+
+Histogram::Histogram() {
     first = 0;
     last = 0;
 }
 
-template<class T> 
-HistoNode<T>* &Histogram<T>::Exists(const T &x) const {
-    if (last == 0) return 0; //histogram is empty
-    HistoNode<T> ptr* = first;
+bool Histogram::Exists(int x) const {
+    if (last == 0) return false; //histogram is empty
+    HistoNode *ptr;
+    ptr = first;
     while (ptr && ptr->data < x) {
         ptr = ptr->link;
     }
-    if (ptr->link == x) {
-        return ptr; //return pointer to the element
+    if (ptr->data == x) {
+        return true; //return pointer to the element
     } else {
-        return 0; //element does not exist
+        return false; //element does not exist
     }
 }
 
-template<class T> 
-void Histogram<T>::Increase(const HistoNode<T> *ptr) {
-    ptr->times = times++; //add to the number of times a number is found, using a pointer to that Histonode
+
+Histogram &Histogram::Increase(int x) {
+    HistoNode *ptr;
+    ptr = first;
+    while (ptr && ptr->data != x) {
+        ptr = ptr->link;
+    }
+    if (ptr->data == x) {
+        ptr->times++;
+        return *this;
+    }
+    return;
 }
 
-template<class T> 
-int Histogram<T>::getMax() const {
-    return last->data; //return the max number in the histogram, using the last Histonode pointer
-}
-
-template<class T> Histogram<T> &Histogram<T>::Insert(const T &x) {
-    HistoNode<T> *h = new HistoNode();
+Histogram &Histogram::Insert(int x) {
+    HistoNode *h = new HistoNode();
     h->data = x;
     h->times = 1;
-    if (last == 0) {
-        h->link = 0;
+
+    if (first->data > x) {
+        //insert first on the histogram
+        h->link = first->link;
         first = h;
+    } else if (last->data < x) {
+        //insert at the end of the histogram
+        h->link = NULL;
+        last->link = h;
         last = h;
     } else {
-        
+        HistoNode *p;
+        HistoNode *next;
+        p = first;
+        next = p->link;
+        while (p && next->data < x) {
+            p = p->link;
+            next = p->link;
+        }
+        //insert between the largest number smaller than x
+        //and the smallest number larger than x;
+        h->link = p->link;
+        p->link = h;
     }
+        
+    return *this;
 }
 
+void Histogram::printHistogram() const {
+    cout<<"Current histogram"<<endl;
+    if (first == 0) {
+        cout<<"histogram is empty"<<endl;
+        return;
+    } else {
+        HistoNode *current;
+        current = first;
+        cout<<"Head->";
+        while(current) {
+            cout<<"["<<current->data<<"|"<<current->times<<"]->";
+        }
+        cout<<"NULL"<<endl;
+    }
+    
+}
 

@@ -1,23 +1,22 @@
-template<class T>
+
 class HistoNode {
-    friend Histogram<T>;
+    friend Histogram;
+
     private:
-        T data;
+        int data;
         int times;
-        HistoNode<T> *link;
+        HistoNode *link;
 };
 
-template <class T>
 class Histogram {
     public:
         Histogram();
         ~Histogram();
-        HistoNode<T>* & Exists(const T& x) const; 
-        int getMax() const; //fetches the largest (essentially last) number of the histogram
-        Histogram<T> & Insert(const T& x); //Inserts the number in the appropriate position
-        void Increase(const HistoNode<T> *ptr); //Increases the times a number is found in the relevant HistoNode
-        
+        bool Exists(int x) const; 
+        Histogram & Insert(int x);                     //Inserts the number in the appropriate position
+        Histogram & Increase(int x);                   //Increases the times a number is found in the relevant HistoNode
+        void printHistogram() const;
     private:
-        HistoNode<T> *first; // pointer to first Histonode
-        HistoNode<T> *last;
+        HistoNode *first; // pointer to first Histonode
+        HistoNode *last;
 };
