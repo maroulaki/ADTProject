@@ -1,11 +1,9 @@
-#include <Chain.h>
+#include "Chain.h"
 #include <iostream>
-#include <exception>
 using namespace std;
 
 Chain::Chain() {
     first = 0;
-    last = 0;
 }
 
 Chain &Chain::setLength(const int& x) {
@@ -14,7 +12,7 @@ Chain &Chain::setLength(const int& x) {
     }
 }
 
-Chain & Chain::Insert(int k, const int &x) {
+void Chain::Insert(int k, const int &x) {
     // Insert x after the k'th element.
     // Throw OutOfBounds exception if no k'th element.
     // Pass NoMem exception if inadequate space.
@@ -26,9 +24,6 @@ Chain & Chain::Insert(int k, const int &x) {
         return;
     }
     // p will eventually point to k'th node
-    //-------------------------------------
-    // according to k value, there is the option to move p directly 
-    // to the first or the last node for insertion
     ChainNode *p;
     
     if ((k > 0) && (k < length)) {
@@ -41,7 +36,6 @@ Chain & Chain::Insert(int k, const int &x) {
         cout<<"k'th element not found"<<endl; // no k'th
         return;
     }
-    
     
     // insert
     ChainNode *y = new ChainNode; 
@@ -59,5 +53,8 @@ Chain & Chain::Insert(int k, const int &x) {
         y->link = p->link; 
         p->link = y;
     }
-    return *this;
+    length++;
+    return;
 }
+
+Chain::~Chain() { }

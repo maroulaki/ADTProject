@@ -1,4 +1,4 @@
-#include <Histogram.h>
+#include "Histogram.h"
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -24,15 +24,15 @@ bool Histogram::Exists(int x) const {
 }
 
 
-Histogram &Histogram::Increase(int x) {
+void Histogram::Increase(int x) {
     HistoNode *ptr;
     ptr = first;
-    while (ptr && ptr->data != x) {
+    while (ptr && ptr->data < x) {
         ptr = ptr->link;
     }
     if (ptr->data == x) {
         ptr->times++;
-        return *this;
+        return;
     }
     return;
 }
@@ -41,10 +41,14 @@ Histogram &Histogram::Insert(int x) {
     HistoNode *h = new HistoNode();
     h->data = x;
     h->times = 1;
-
-    if (first->data > x) {
-        //insert first on the histogram
-        h->link = first->link;
+    if (first == 0) {
+        //first element in the histogram
+        h->link = first;
+        first = h;
+        last = h;
+    } else if (first->data > x) {
+        //insert before first element
+        h->link = first;
         first = h;
     } else if (last->data < x) {
         //insert at the end of the histogram
@@ -56,10 +60,16 @@ Histogram &Histogram::Insert(int x) {
         HistoNode *next;
         p = first;
         next = p->link;
-        while (p && next->data < x) {
-            p = p->link;
-            next = p->link;
+        if (next != 0) {
+            while (p && next->data < x) {
+                p = p->link;
+                next = p->link;
+                if (next == 0) {
+                    break;
+                }
+            }
         }
+       
         //insert between the largest number smaller than x
         //and the smallest number larger than x;
         h->link = p->link;
@@ -86,3 +96,4 @@ void Histogram::printHistogram() const {
     
 }
 
+Histogram::~Histogram() { }

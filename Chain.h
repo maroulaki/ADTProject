@@ -14,12 +14,11 @@ class Chain {
         Chain();
         ~Chain();
         Chain & setLength(const int& x); //set maximum length of the list
-        Chain & Insert(int k, const int& x);
+        void Insert(int k, const int& x);
     private:
-        ChainNode *first; // pointer to first node
-        ChainNode *last; //pointer to last node
-        int length; //length of list
-        int maxL;
+        ChainNode *first;               //pointer to first node
+        int length;                     //length of list
+        int maxL;                       //maximum length allowed 
 };
 
 
