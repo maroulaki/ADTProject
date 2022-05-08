@@ -1,8 +1,8 @@
 #include <iostream>
 #include <random>
 #include <functional>
-#include <Chain.h>
-#include <Histogram.h>
+#include "Chain.h"
+#include "Histogram.h"
 using namespace std;
 
 
@@ -30,4 +30,6 @@ int main() {
     
     L.~Chain();
     histogram.~Histogram();
+
+    return 0;
 }

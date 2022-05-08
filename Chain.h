@@ -1,3 +1,5 @@
+class Chain;
+
 class ChainNode {
     friend Chain;
     private:

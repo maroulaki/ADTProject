@@ -1,3 +1,4 @@
+class Histogram;
 
 class HistoNode {
     friend Histogram;
