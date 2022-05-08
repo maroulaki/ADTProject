@@ -3,40 +3,39 @@
 #include <exception>
 using namespace std;
 
+int ChainNode::getX() const {
+    return data;
+}
+
 Chain::Chain() {
     first = 0;
     last = 0;
 }
 
-int Chain::Search(const int &x) const {
-    // Locate x. Return position of x if found.
-    // Return 0 if x not in the chain.
-    ChainNode *current = first;
-    int index = 1; // index of current
-    while (current && current->data != x) {
-        current = current->link;
-        index++;
+Chain &Chain::setLength(const int& x) {
+    if (x > 0) {
+        maxL = x;
     }
-    if (current) return index;
-    return 0;
 }
-
 
 Chain & Chain::Insert(int k, const int &x) {
     // Insert x after the k'th element.
     // Throw OutOfBounds exception if no k'th element.
     // Pass NoMem exception if inadequate space.
-    if (k < 0) {
+    if ((k < 0) || (k >= length+1)) {
         cout<<"Invalid k position"<<endl;
-        throw __throw_range_error;
+        return;
+    } else if (length == maxL) {
+        cout<<"Not enough space"<<endl;
+        return;
     }
     // p will eventually point to k'th node
+    //-------------------------------------
+    // according to k value, there is the option to move p directly 
+    // to the first or the last node for insertion
     ChainNode *p;
-    if (k == 0) {
-        p = first;
-    } else if (k == length) {
-        p = last;
-    } else {
+    
+    if ((k > 0) && (k < length)) {
         for (int index = 1; index < k && p; index++) {
             p = p->link; // move p to k'th
         }
@@ -44,17 +43,19 @@ Chain & Chain::Insert(int k, const int &x) {
     
     if (k > 0 && !p) {
         cout<<"k'th element not found"<<endl; // no k'th
-        throw __throw_range_error;
+        return;
     }
+    
     
     // insert
     ChainNode *y = new ChainNode; 
     y->data = x;
     if (k == 0) {
         // insert as first element
-        y->link = NULL; 
+        y->link = first; 
         first = y;
     } else if (k == length) {
+        //insert after last element
         y->link = NULL;
         p->link = y;
     } else {

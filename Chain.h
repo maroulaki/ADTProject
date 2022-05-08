@@ -1,8 +1,11 @@
 class ChainNode {
     friend Chain;
+    public:
+        int getX() const;
     private:
         int data;
         ChainNode *link;
+    
 };
 
 
@@ -10,12 +13,13 @@ class Chain {
     public:
         Chain();
         ~Chain();
-        int Search(const int& x) const; 
+        Chain & setLength(const int& x); //set maximum length of the list
         Chain & Insert(int k, const int& x);
     private:
         ChainNode *first; // pointer to first node
         ChainNode *last; //pointer to last node
         int length; //length of list
+        int maxL;
 };
 
 
