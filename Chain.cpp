@@ -9,12 +9,12 @@ Chain::Chain() {
 Chain &Chain::setLength(const int& x) {
     if (x > 0) {
         maxL = x;
+        return *this;
     }
 }
 
-void Chain::Insert(int k, const int &x) {
+void Chain::Insert(int k, const int& x) {
     // Insert x after the k'th element.
-    // Throw OutOfBounds exception if no k'th element.
     // Pass NoMem exception if inadequate space.
     if ((k < 0) || (k >= length+1)) {
         cout<<"Invalid k position"<<endl;
@@ -27,14 +27,9 @@ void Chain::Insert(int k, const int &x) {
     ChainNode *p;
     
     if ((k > 0) && (k < length)) {
-        for (int index = 1; index < k && p; index++) {
+        for (int index = 1; (index < k && p->link != NULL); index++) {
             p = p->link; // move p to k'th
         }
-    }
-    
-    if (k > 0 && !p) {
-        cout<<"k'th element not found"<<endl; // no k'th
-        return;
     }
     
     // insert
@@ -54,7 +49,7 @@ void Chain::Insert(int k, const int &x) {
         p->link = y;
     }
     length++;
-    return;
+    cout<<"Inserted"<<endl;
 }
 
 Chain::~Chain() { }

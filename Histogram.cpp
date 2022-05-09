@@ -10,14 +10,14 @@ Histogram::Histogram() {
 }
 
 bool Histogram::Exists(int x) const {
-    if (last == 0) return false; //histogram is empty
+    if (first == 0) return false; //histogram is empty
     HistoNode *ptr;
     ptr = first;
-    while (ptr && ptr->data < x) {
+    while (ptr->link != NULL && ptr->data < x) {
         ptr = ptr->link;
     }
     if (ptr->data == x) {
-        return true; //return pointer to the element
+        return true;  //return pointer to the element
     } else {
         return false; //element does not exist
     }
@@ -27,14 +27,13 @@ bool Histogram::Exists(int x) const {
 void Histogram::Increase(int x) {
     HistoNode *ptr;
     ptr = first;
-    while (ptr && ptr->data < x) {
+    while (ptr->link != NULL && ptr->data < x) {
         ptr = ptr->link;
     }
     if (ptr->data == x) {
         ptr->times++;
-        return;
+        cout<<"increased"<<endl;
     }
-    return;
 }
 
 Histogram &Histogram::Insert(int x) {
@@ -46,27 +45,27 @@ Histogram &Histogram::Insert(int x) {
         h->link = first;
         first = h;
         last = h;
+        cout<<"Inserted branch 1"<<endl;
     } else if (first->data > x) {
         //insert before first element
         h->link = first;
         first = h;
+        cout<<"Inserted branch 2"<<endl;
     } else if (last->data < x) {
         //insert at the end of the histogram
         h->link = NULL;
         last->link = h;
         last = h;
+        cout<<"Inserted branch 3"<<endl;
     } else {
         HistoNode *p;
         HistoNode *next;
         p = first;
         next = p->link;
         if (next != 0) {
-            while (p && next->data < x) {
+            while (p->link != NULL && next->data < x) {
                 p = p->link;
-                next = p->link;
-                if (next == 0) {
-                    break;
-                }
+                next = p->link; 
             }
         }
        
@@ -74,6 +73,7 @@ Histogram &Histogram::Insert(int x) {
         //and the smallest number larger than x;
         h->link = p->link;
         p->link = h;
+        cout<<"Inserted branch 4"<<endl;
     }
         
     return *this;
@@ -88,9 +88,11 @@ void Histogram::printHistogram() const {
         HistoNode *current;
         current = first;
         cout<<"Head->";
-        while(current) {
+        while(current->link != NULL) {
             cout<<"["<<current->data<<"|"<<current->times<<"]->";
+            current = current->link;
         }
+        cout<<"["<<current->data<<"|"<<current->times<<"]->";
         cout<<"NULL"<<endl;
     }
 }
