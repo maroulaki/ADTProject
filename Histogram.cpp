@@ -3,7 +3,7 @@
 #include <stdio.h>
 using namespace std;
 
-
+//Constructor
 Histogram::Histogram() {
     first = 0;
     last = 0;
@@ -17,14 +17,13 @@ bool Histogram::Exists(int x) const {
         ptr = ptr->link;
     }
     if (ptr->data == x) {
-        return true;  //return pointer to the element
-    } else {
-        return false; //element does not exist
+        return true;    //return pointer to the element
     }
+    return false;       //element does not exist
 }
 
 
-void Histogram::Increase(int x) {
+bool Histogram::Increase(int x) {
     HistoNode *ptr;
     ptr = first;
     while (ptr->link != NULL && ptr->data < x) {
@@ -32,8 +31,9 @@ void Histogram::Increase(int x) {
     }
     if (ptr->data == x) {
         ptr->times++;
-        cout<<"increased"<<endl;
+        return true;
     }
+    return false;
 }
 
 Histogram &Histogram::Insert(int x) {
@@ -45,18 +45,15 @@ Histogram &Histogram::Insert(int x) {
         h->link = first;
         first = h;
         last = h;
-        cout<<"Inserted branch 1"<<endl;
     } else if (first->data > x) {
         //insert before first element
         h->link = first;
         first = h;
-        cout<<"Inserted branch 2"<<endl;
     } else if (last->data < x) {
         //insert at the end of the histogram
         h->link = NULL;
         last->link = h;
         last = h;
-        cout<<"Inserted branch 3"<<endl;
     } else {
         HistoNode *p;
         HistoNode *next;
@@ -68,12 +65,10 @@ Histogram &Histogram::Insert(int x) {
                 next = p->link; 
             }
         }
-       
         //insert between the largest number smaller than x
         //and the smallest number larger than x;
         h->link = p->link;
         p->link = h;
-        cout<<"Inserted branch 4"<<endl;
     }
         
     return *this;
