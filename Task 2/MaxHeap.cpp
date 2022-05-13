@@ -1,13 +1,15 @@
 #include "MaxHeap.h"
+#include <exception>
+#include "excpt.h"
 
-template<class T> MaxHeap<T>::MaxHeap() {
+MaxHeap::MaxHeap() {
     CurrentSize = 0;
     MaxSize = 0;
 }
 
-template<class T> MaxHeap<T> &MaxHeap<T>::Insert(const T &x) { 
+MaxHeap & MaxHeap::Insert(const float &x) { 
     // Insert x into the max heap.
-    if (CurrentSize == MaxSize) throw NoMem(); // no space
+    if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space
 
     // find place for x
     // i starts at new leaf and moves up tree
@@ -21,17 +23,17 @@ template<class T> MaxHeap<T> &MaxHeap<T>::Insert(const T &x) {
     return *this;
 }
 
-template<class T> MaxHeap<T> &MaxHeap<T>::DeleteMax(T &x) {
+MaxHeap & MaxHeap::DeleteMax(float &x) {
     // Set x to max element and delete
     // max element from heap.
     // check if heap is empty
 
     if (CurrentSize == 0)
-    throw OutOfBounds(); // empty
+    throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
     x = heap[1]; // max element
 
     // restucture heap
-    T y = heap[CurrentSize--]; // last element
+    float y = heap[CurrentSize--]; // last element
 
     // find place for y starting at root
     // find place for y starting at root
@@ -53,7 +55,7 @@ template<class T> MaxHeap<T> &MaxHeap<T>::DeleteMax(T &x) {
     return *this;
 }
 
-template<class T> void MaxHeap<T>::Initialize(T *a, int size, int ArraySize) {
+void MaxHeap::Initialize(float a[], int size, int ArraySize) {
     // Initialize max heap to array a.
     delete [] heap;
     heap = a;
@@ -62,7 +64,7 @@ template<class T> void MaxHeap<T>::Initialize(T *a, int size, int ArraySize) {
 
     // make into a max heap
     for (int i = CurrentSize/2; i >= 1; i--) {
-        T y = heap[i]; // root of subtree
+        float y = heap[i]; // root of subtree
 
         // find place to put y
         int c = 2*i; // parent of c is target
