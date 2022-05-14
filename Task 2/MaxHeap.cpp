@@ -83,4 +83,4 @@ void MaxHeap::Initialize(float a[], int size, int ArraySize) {
     }
 }
 
-
+MaxHeap::~MaxHeap() { }

@@ -7,6 +7,7 @@ MinHeap::MinHeap() {
     MaxSize = 0;
 }
 
+
 MinHeap & MinHeap::Insert(const float &x) { 
     // Insert x into the Min heap.
     if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space
@@ -14,7 +15,7 @@ MinHeap & MinHeap::Insert(const float &x) {
     // find place for x
     // i starts at new leaf and moves up tree
     int i = ++CurrentSize;
-    while (i != 1 && x > heap[i/2]) {
+    while (i != 1 && x < heap[i/2]) {
         // cannot put x in heap[i]
         heap[i] = heap[i/2]; // move element down
         i /= 2; // move to parent
@@ -23,16 +24,15 @@ MinHeap & MinHeap::Insert(const float &x) {
     return *this;
 }
 
-//NO CHANGES TO CODE YET
 
 MinHeap & MinHeap::DeleteMin(float &x) {
-    // Set x to max element and delete
-    // max element from heap.
+    // Set x to min element and delete
+    // min element from heap.
     // check if heap is empty
 
     if (CurrentSize == 0)
     throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
-    x = heap[1]; // max element
+    x = heap[1]; // min element
 
     // restucture heap
     float y = heap[CurrentSize--]; // last element
@@ -44,10 +44,10 @@ MinHeap & MinHeap::DeleteMin(float &x) {
     ci = 2; // child of i
     
     while (ci <= CurrentSize) {
-        // heap[ci] should be largest child of i
-        if (ci < CurrentSize && heap[ci] < heap[ci+1]) ci++;
+        // heap[ci] should be smallest child of i 
+        if (ci < CurrentSize && heap[ci] > heap[ci+1]) ci++;
         // can we put y in heap[i]?
-        if (y >= heap[ci]) break; // yes
+        if (y <= heap[ci]) break; // yes
         // no
         heap[i] = heap[ci]; // move child up
         i = ci; 
@@ -73,9 +73,9 @@ void MinHeap::Initialize(float a[], int size, int ArraySize) {
         // location for y
         while (c <= CurrentSize) {
             // heap[c] should be larger sibling
-            if (c < CurrentSize && heap[c] < heap[c+1]) c++;
+            if (c < CurrentSize && heap[c] > heap[c+1]) c++;
             // can we put y in heap[c/2]?
-            if (y >= heap[c]) break; // yes
+            if (y <= heap[c]) break; // yes
             // no
             heap[c/2] = heap[c]; // move child up
             c *= 2; // move down a level
@@ -84,3 +84,5 @@ void MinHeap::Initialize(float a[], int size, int ArraySize) {
         heap[c/2] = y;
     }
 }
+
+MinHeap::~MinHeap() { }
