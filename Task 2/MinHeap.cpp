@@ -1,16 +1,19 @@
 #include "MinHeap.h"
 #include <exception>
 #include "excpt.h"
+#include <iostream>
+using namespace std;
 
 MinHeap::MinHeap() {
     CurrentSize = 0;
     MaxSize = 0;
 }
 
-
-MinHeap & MinHeap::Insert(const float &x) { 
+void MinHeap::Insert(const float &x) { 
     // Insert x into the Min heap.
-    //if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space
+    if (CurrentSize == MaxSize) {
+        cout<<"Not enough space"<<endl; // no space
+    }
 
     // find place for x
     // i starts at new leaf and moves up tree
@@ -21,17 +24,17 @@ MinHeap & MinHeap::Insert(const float &x) {
         i /= 2; // move to parent
     }
     heap[i] = x;
-    return *this;
 }
 
 
-MinHeap & MinHeap::DeleteMin(float &x) {
+void MinHeap::DeleteMin(float &x) {
     // Set x to min element and delete
     // min element from heap.
     // check if heap is empty
 
-    if (CurrentSize == 0)
-    //throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
+    if (CurrentSize == 0) {
+        cout<<"Hepa is empty"<<endl;// empty
+    }
     x = heap[1]; // min element
 
     // restucture heap
@@ -54,12 +57,10 @@ MinHeap & MinHeap::DeleteMin(float &x) {
         ci *= 2; // move down a level
     }
     heap[i] = y;
-    return *this;
 }
 
 void MinHeap::Initialize(float a[], int size, int ArraySize) {
     // Initialize Min heap to array a.
-    //delete [] heap; // commented out because caused exception
     heap = a;
     CurrentSize = size;
     MaxSize = ArraySize;

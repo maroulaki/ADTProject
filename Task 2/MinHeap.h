@@ -3,8 +3,8 @@ class MinHeap
     public:
         MinHeap();
         ~MinHeap();
-        MinHeap & Insert(const float& x);
-        MinHeap & DeleteMin(float& x);
+        void Insert(const float& x);
+        void DeleteMin(float& x);
         void Initialize(float a[], int size, int ArraySize);
     private:
         int CurrentSize;
