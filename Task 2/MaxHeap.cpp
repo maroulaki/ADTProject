@@ -1,6 +1,7 @@
 #include "MaxHeap.h"
 #include <exception>
 #include "excpt.h"
+#include <iostream>
 
 MaxHeap::MaxHeap() {
     CurrentSize = 0;
@@ -9,7 +10,7 @@ MaxHeap::MaxHeap() {
 
 MaxHeap & MaxHeap::Insert(const float &x) { 
     // Insert x into the max heap.
-    if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space
+    //if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space //error not enough memory causes compile error
 
     // find place for x
     // i starts at new leaf and moves up tree
@@ -29,7 +30,7 @@ MaxHeap & MaxHeap::DeleteMax(float &x) {
     // check if heap is empty
 
     if (CurrentSize == 0)
-    throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
+    //throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
     x = heap[1]; // max element
 
     // restucture heap
@@ -57,11 +58,10 @@ MaxHeap & MaxHeap::DeleteMax(float &x) {
 
 void MaxHeap::Initialize(float a[], int size, int ArraySize) {
     // Initialize max heap to array a.
-    delete [] heap;
+    //delete [] heap;  // commented out because caused exception
     heap = a;
     CurrentSize = size;
     MaxSize = ArraySize;
-
     // make into a max heap
     for (int i = CurrentSize/2; i >= 1; i--) {
         float y = heap[i]; // root of subtree

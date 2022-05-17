@@ -10,7 +10,7 @@ MinHeap::MinHeap() {
 
 MinHeap & MinHeap::Insert(const float &x) { 
     // Insert x into the Min heap.
-    if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space
+    //if (CurrentSize == MaxSize) throw ERROR_NOT_ENOUGH_MEMORY; // no space
 
     // find place for x
     // i starts at new leaf and moves up tree
@@ -31,7 +31,7 @@ MinHeap & MinHeap::DeleteMin(float &x) {
     // check if heap is empty
 
     if (CurrentSize == 0)
-    throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
+    //throw ERROR_DS_OFFSET_RANGE_ERROR; // empty
     x = heap[1]; // min element
 
     // restucture heap
@@ -59,7 +59,7 @@ MinHeap & MinHeap::DeleteMin(float &x) {
 
 void MinHeap::Initialize(float a[], int size, int ArraySize) {
     // Initialize Min heap to array a.
-    delete [] heap;
+    //delete [] heap; // commented out because caused exception
     heap = a;
     CurrentSize = size;
     MaxSize = ArraySize;
