@@ -1,4 +1,4 @@
-### Task 2
+# Task 2
 
 ## MinHeap
 Το MinHeap ως τάξη έχει τρεις μεταβλητές ένα pointer `heap` σε ένα array που αρχικοποιείται στην main, το τωρινό μέγεθος `CurrentSize` και το μέγιστο μέγεθος `MaxSize`. Εχει επίσης 5 μεθόδους το constructor `MinHeap()`, το destructor `~MinHeap()`, το `Initialize()`, το `Insert()` και το `DeleteMin()`. Το constructor αρχικοποιεί της μεταβλητές. Το `Initialize()` παίρνει ένα pointer για array, και τα μεγέθη του δέντρου. Το `Insert()` τοποθετεί ένα float στο `heap` και κάνει heapify το array. Το `DeleteMin()` επιστρέφει το μικρότερο στοιχειό του δέντρου, έπειτα βάζει στην θέση του το τελευταίο στοιχείο στο δέντρο και κάνει heapify.
