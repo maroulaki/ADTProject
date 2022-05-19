@@ -57,51 +57,6 @@ int main(){
 	float MinHeapMIN;	// the smallest from the min
 	float temp_float_sum; //sum for temp floats
 
-	// //---------PETROS CODE FOR SUMS
-	
-	// //go through the max heap
-	// for (int i = 0; i < size/2; i++)
-	// {
-	// 	if (i % 2 == 0)// picks the first max when i is odd
-	// 	{
-	// 		maxheap.DeleteMax(temp_float);
-	// 	}
-	// 	else { // the second when tis even and it adds them
-	// 		maxheap.DeleteMax(temp_float2);
-	// 		temp_float = temp_float + temp_float2;
-	// 		maxheap.Insert(temp_float);
-	// 	}
-	// }// since we only add between them the final result will be the biggest
-	// if (!(temp_float > temp_float2)) {
-	// 	float MaxHeapMAX = temp_float2;
-	// }
-	// else {
-	// 	float MaxHeapMAX = temp_float2;
-	// }
-
-	
-	// //go through the min heap
-	// for (int i = 0; i < size / 2; i++)
-	// {
-	// 	if (i % 2 == 0)
-	// 	{
-	// 		minheap.DeleteMin(temp_float);
-	// 	}
-	// 	else {
-	// 		minheap.DeleteMin(temp_float2);
-	// 		temp_float = temp_float + temp_float2;
-	// 		minheap.Insert(temp_float);
-	// 	}
-	// }
-
-	// if (!(temp_float > temp_float2)) {
-	// 	float MinHeapMIN = temp_float2;
-	// }
-	// else {
-	// 	float MinHeapMIN = temp_float;
-	// }
-
-	//-------------MARIA CODE------
 	for (int i = 0; i < size-1; i++) {
 		//Repeating the process of adding 2 floats together and 
 		//inseting the sum back for both heaps
